@@ -2,9 +2,6 @@
 # 🧠 Python 記憶翻牌遊戲（Memory Match Game）－生存挑戰版
 
 > 一個結合「時間生存戰」與「特殊道具」的經典記憶翻牌遊戲。
-
-![遊戲畫面](screenshot.png)
-
 ---
 
 ## 📖 專題簡介（Introduction）
