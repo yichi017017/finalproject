@@ -1,0 +1,29 @@
+import tkinter as tk
+from tkinter import messagebox
+import random
+
+class AdvancedMemoryGame:
+    def __init__(self, root):
+        self.root = root
+        self.root.title("記憶翻牌：生存挑戰版")
+        
+        # --- 遊戲參數設定 ---
+        self.total_time = 60  
+        self.peek_uses = 1   
+        self.game_running = False
+        
+        # --- 遊戲變數 ---
+        self.buttons = []
+        self.cards = []
+        self.first_selection = None
+        self.second_selection = None
+        self.matches_found = 0
+        self.is_checking = False # 鎖定狀態
+        self.symbols = ['🍎', '🍌', '🍇', '🍉', '🐶', '🐱', '🚗', '🚀']
+
+        # --- 建立介面 ---
+        self.create_ui()
+        self.setup_board()
+        
+        # --- 啟動計時器 ---
+        self.start_timer()
