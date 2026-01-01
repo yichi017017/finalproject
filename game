@@ -69,3 +69,20 @@ class AdvancedMemoryGame:
             self.buttons.append(btn)
         
         self.game_running = True
+
+    def start_timer(self):
+        if self.game_running and self.total_time > 0:
+            self.total_time -= 1
+            self.update_time_label()
+            # 每 1000 毫秒 (1秒) 呼叫自己一次
+            self.root.after(1000, self.start_timer)
+        elif self.total_time <= 0 and self.game_running:
+            self.game_over(win=False)
+
+    def update_time_label(self):
+        self.time_label.config(text=f"⏳ 時間: {self.total_time}")
+        # 時間少於 10 秒變紅色警告
+        if self.total_time < 10:
+            self.time_label.config(fg="red")
+        else:
+            self.time_label.config(fg="blue")
