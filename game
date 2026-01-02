@@ -86,3 +86,25 @@ class AdvancedMemoryGame:
             self.time_label.config(fg="red")
         else:
             self.time_label.config(fg="blue")
+
+    def use_peek(self):
+        # 特殊玩法：透視眼
+        if self.peek_uses > 0 and not self.is_checking and self.game_running:
+            self.peek_uses -= 1
+            self.peek_btn.config(text=f"👁️ 透視眼 ({self.peek_uses})", state="disabled")
+            
+            self.is_checking = True # 鎖定不讓玩家點擊
+            
+            # 暫時顯示所有未配對的牌
+            for i, btn in enumerate(self.buttons):
+                if btn['state'] != 'disabled': # 只顯示還沒配對成功的
+                    btn.config(text=self.cards[i], bg="lightyellow")
+            
+            # 1.5 秒後蓋回去
+            self.root.after(1500, self.hide_all_cards
+
+    def hide_all_cards(self):
+        for i, btn in enumerate(self.buttons):
+            if btn['state'] != 'disabled':
+                btn.config(text=" ", bg="SystemButtonFace")
+        self.is_checking = False # 解鎖
