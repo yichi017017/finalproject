@@ -108,3 +108,20 @@ class AdvancedMemoryGame:
             if btn['state'] != 'disabled':
                 btn.config(text=" ", bg="SystemButtonFace")
         self.is_checking = False # 解鎖
+
+    def on_card_click(self, index):
+        if self.is_checking or not self.game_running or self.buttons[index]['text'] != " ":
+            return
+
+        self.buttons[index].config(text=self.cards[index], bg="white")
+
+        if self.first_selection is None:
+            self.first_selection = index
+        else:
+            self.second_selection = index
+            self.is_checking = True
+            self.check_match()
+
+    def check_match(self):
+        idx1, idx2 = self.first_selection, self.second_selection
+        
