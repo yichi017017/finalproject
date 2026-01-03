@@ -151,3 +151,17 @@ class AdvancedMemoryGame:
             self.buttons[self.second_selection].config(text=" ", bg="SystemButtonFace")
             self.reset_selection()
         
+    def reset_selection(self):
+        self.first_selection = None
+        self.second_selection = None
+        self.is_checking = False
+
+    def game_over(self, win):
+        self.game_running = False
+        if win:
+            messagebox.showinfo("遊戲結束", f"恭喜通關！\n剩餘時間：{self.total_time} 秒")
+        else:
+            # 時間到，翻開所有牌給玩家看
+            for i, btn in enumerate(self.buttons):
+                btn.config(text=self.cards[i], bg="lightgray")
+            messagebox.showinfo("遊戲結束", "時間到！挑戰失敗 💀")
