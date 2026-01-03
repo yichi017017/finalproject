@@ -124,4 +124,30 @@ class AdvancedMemoryGame:
 
     def check_match(self):
         idx1, idx2 = self.first_selection, self.second_selection
+
+        if self.cards[idx1] == self.cards[idx2]:
+            # 配對成功
+            self.buttons[idx1].config(bg="lightgreen", state="disabled")
+            self.buttons[idx2].config(bg="lightgreen", state="disabled")
+            self.matches_found += 1
+            
+            # 特殊玩法：獎勵時間
+            self.total_time += 5
+            self.update_time_label()
+            
+            self.reset_selection()
+            if self.matches_found == 8:
+                self.game_over(win=True)
+        else:
+            # 配對失敗：懲罰時間
+            self.total_time -= 2
+            self.update_time_label()
+            self.root.after(1000, self.hide_pair)
+
+    def hide_pair(self):
+        # 檢查遊戲是否還在進行（避免時間結束後還執行這裡報錯）
+        if self.game_running:
+            self.buttons[self.first_selection].config(text=" ", bg="SystemButtonFace")
+            self.buttons[self.second_selection].config(text=" ", bg="SystemButtonFace")
+            self.reset_selection()
         
