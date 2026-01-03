@@ -165,3 +165,29 @@ class AdvancedMemoryGame:
             for i, btn in enumerate(self.buttons):
                 btn.config(text=self.cards[i], bg="lightgray")
             messagebox.showinfo("遊戲結束", "時間到！挑戰失敗 💀")
+
+    def reset_game(self):
+        # 重置所有數值
+        self.total_time = 60
+        self.peek_uses = 1
+        self.matches_found = 0
+        self.first_selection = None
+        self.second_selection = None
+        self.is_checking = False
+        
+        # 重置 UI
+        self.peek_btn.config(text=f"👁️ 透視眼 ({self.peek_uses})", state="normal")
+        self.update_time_label()
+        
+        # 重新佈局
+        self.setup_board()
+        
+        # 確保計時器重新啟動 (如果之前已經停止)
+        if not self.game_running: 
+            self.game_running = True
+            self.start_timer()
+
+if __name__ == "__main__":
+    root = tk.Tk()
+    game = AdvancedMemoryGame(root)
+    root.mainloop()
