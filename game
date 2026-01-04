@@ -101,7 +101,7 @@ class AdvancedMemoryGame:
                     btn.config(text=self.cards[i], bg="lightyellow")
             
             # 1.5 秒後蓋回去
-            self.root.after(1500, self.hide_all_cards
+            self.root.after(1500, self.hide_all_cards)
 
     def hide_all_cards(self):
         for i, btn in enumerate(self.buttons):
